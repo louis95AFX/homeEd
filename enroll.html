@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeEd Tutor Connect — Supporting Learning at Home</title>
+<meta name="description" content="HomeEd Tutor Connect - Connecting parents, freelance tutors, and tutor centres across South Africa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #112233;
+    --navy-light: #1e3a5f;
+    --accent: #2563eb;
+    --bg-light: #f8fafc;
+    --border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Work Sans', sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--navy);
+  }
+
+  .brand img {
+    height: 40px;
+    width: auto;
+  }
+
+  .brand-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .brand-name span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  .nav-cta {
+    background: var(--navy);
+    color: #ffffff !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+  }
+
+  .tutor-hero {
+    padding: 60px 0 30px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tutor-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    color: var(--navy);
+    margin: 10px 0;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  /* Role Routing System Controls */
+  .role-selector {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 35px 0 25px;
+    flex-wrap: wrap;
+  }
+
+  .role-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 2px solid var(--navy);
+    background: transparent;
+    color: var(--navy);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .role-btn.active, .role-btn:hover {
+    background: var(--navy);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(17, 34, 51, 0.15);
+  }
+
+  /* Form Containers */
+  .form-container {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    max-width: 850px;
+    margin: 0 auto 60px;
+  }
+
+  .form-section-title {
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f4f8;
+  }
+
+  .form-section-title h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .form-section-title p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group.full {
+    grid-column: span 2;
+  }
+
+  .form-group label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .form-group input, 
+  .form-group select, 
+  .form-group textarea {
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background-color: #fff;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus, 
+  .form-group select:focus, 
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .file-upload-box {
+    border: 2px dashed #cbd5e1;
+    padding: 16px;
+    border-radius: 6px;
+    background: #f8fafc;
+  }
+
+  .file-upload-box input[type="file"] {
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  .btn {
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background: var(--navy-light);
+  }
+
+  .hidden-form {
+    display: none;
+  }
+
+  footer {
+    background: var(--navy);
+    color: #ffffff;
+    padding: 40px 0;
+    margin-top: 40px;
+  }
+
+  .foot-brand .brand-name {
+    color: #ffffff;
+  }
+
+  .foot-brand .brand-name span {
+    color: #94a3b8;
+  }
+
+  @media (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+    .form-container { padding: 25px 20px; }
+    .nav-links { display: none; }
+    .role-selector { flex-direction: column; }
+    .role-btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="brand">
+      <span class="brand-name">HomeEd<span>SUPPORT · STRUCTURE · SUCCESS</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#curriculum">Curriculum</a></li>
+      <li><a href="#pillars">Why Us</a></li>
+      <li><a href="#bookshop">Bookshop</a></li>
+      <li><a href="#tutor-connect">Tutor Connect</a></li>
+      <li><a href="#contact" class="nav-cta">Enrol Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- HERO SECTION -->
+  <section class="tutor-hero">
+    <div class="wrap">
+      <span class="eyebrow">Academic Network</span>
+      <h1>HomeEd Tutor Connect</h1>
+      <p class="lead">Connecting home-education learners with quality tutors and established tutor centres nationwide[cite: 1].</p>
+      
+      <!-- ROLE ROUTING SYSTEM: Section buttons to toggle between user journeys -->
+      <div class="role-selector">
+        <button class="role-btn active" onclick="switchForm('parent-form', this)">Parents — Request a Tutor</button>
+        <button class="role-btn" onclick="switchForm('freelance-form', this)">Freelance Tutors — Apply as a Tutor</button>
+        <button class="role-btn" onclick="switchForm('centre-form', this)">Tutor Centres — Register Your Centre</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM CONTAINERS -->
+  <section id="tutor-connect">
+    <div class="wrap">
+      
+      <!-- FORM 1: PARENTS - REQUEST A TUTOR -->
+      <div id="parent-form" class="form-container">
+        <div class="form-section-title">
+          <h3>Request Additional Tutoring Support</h3>
+          <p>Complete your requirements below to match with targeted tutoring support for your learner[cite: 1].</p>
+        </div>
+        <form action="#" method="POST">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="p-name">Parent / Guardian Name *</label>
+              <input type="text" id="p-name" name="parent_name" required placeholder="e.g. Sarah Smith">
+            </div>
+            <div class="form-group">
+              <label for="p-contact">Contact Details (Phone / Email) *</label>
+              <input type="text" id="p-contact" name="parent_contact" required placeholder="082 123 4567 / name@domain.co.za">
+            </div>
+            <div class="form-group">
+              <label for="p-grade">Learner's Grade *</label>
+              <select id="p-grade" name="learner_grade" required>
+                <option value="">Select Grade</option>
+                <option value="Grade R-3">Foundation Phase (Grade R - 3)</option>
+                <option value="Grade 4-6">Intermediate Phase (Grade 4 - 6)</option>
+                <option value="Grade 7-9">Senior Phase (Grade 7 - 9)</option>
+                <option value="Grade 10-12">FET Phase (Grade 10 - 12)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="p-subjects">Target Subjects *</label>
+              <input type="text" id="p-subjects" name="subjects" required placeholder="e.g. Mathematics, English, Natural Sciences">
+            </div>
+            <div class="form-group">
+              <label for="p-mode">Delivery Choice *</label>
+              <select id="p-mode" name="tutoring_mode" required>
+                <option value="Online">Online Tutoring</option>
+                <option value="In-person">In-person Tutoring</option>
+                <option value="Either">Either / Flexible</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="p-area">Location / Province *</label>
+              <input type="text" id="p-area" name="province_area" required placeholder="e.g. Gauteng, Randburg">
+            </div>
+            <div class="form-group full">
+              <label for="p-schedule">Schedule Preferences *</label>
+              <input type="text" id="p-schedule" name="preferred_schedule" required placeholder="e.g. Monday & Wednesday afternoons after 14:00">
+            </div>
+            <div class="form-group full">
+              <label for="p-notes">General Notes</label>
+              <textarea id="p-notes" name="additional_info" placeholder="Provide any additional learner background, special educational needs, or focus areas..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:25px; width: 100%;">Request a Tutor</button>
+        </form>
+      </div>
+
+      <!-- FORM 2: FREELANCE TUTORS - APPLY AS A TUTOR -->
+      <div id="freelance-form" class="form-container hidden-form">
+        <div class="form-section-title">
+          <h3>Apply as an Independent / Freelance Tutor</h3>
+          <p>Join our tutor network to support homeschooling families with tailored instruction[cite: 1].</p>
+        </div>
+        <form action="#" method="POST" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="t-name">Personal Details (Full Name) *</label>
+              <input type="text" id="t-name" name="full_name" required placeholder="Your full legal name">
+            </div>
+            <div class="form-group">
+              <label for="t-contact">Contact Information *</label>
+              <input type="text" id="t-contact" name="contact_details" required placeholder="Phone number & email address">
+            </div>
+            <div class="form-group">
+              <label for="t-qualifications">Academic Credentials *</label>
+              <input type="text" id="t-qualifications" name="qualifications" required placeholder="e.g. BEd Senior Phase / BSc Mathematics">
+            </div>
+            <div class="form-group">
+              <label for="t-subjects">Subjects *</label>
+              <input type="text" id="t-subjects" name="subjects_offered" required placeholder="e.g. Physical Sciences, Mathematics">
+            </div>
+            <div class="form-group">
+              <label for="t-grades">Grade Ranges *</label>
+              <input type="text" id="t-grades" name="grades_offered" required placeholder="e.g. Grade 4 - 9">
+            </div>
+            <div class="form-group">
+              <label for="t-delivery">Mode of Delivery *</label>
+              <select id="t-delivery" name="delivery_mode" required>
+                <option value="Online">Online</option>
+                <option value="In-person">In-person</option>
+                <option value="Both">Both Online & In-person</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="t-rate">Hourly Rate (ZAR/hr) *</label>
+              <input type="text" id="t-rate" name="expected_rate" required placeholder="e.g. R200 - R300/hr">
+            </div>
+            <div class="form-group">
+              <label for="t-availability">Availability *</label>
+              <input type="text" id="t-availability" name="availability" required placeholder="e.g. Weekday afternoons, Saturdays">
+            </div>
+            <div class="form-group full">
+              <label for="t-experience">Tutoring Experience *</label>
+              <textarea id="t-experience" name="tutoring_experience" required placeholder="Outline your previous teaching or tutoring experience..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label for="t-references">Contactable References *</label>
+              <textarea id="t-references" name="references" required placeholder="Provide at least 2 contactable references (Name, Title, Contact Info)"></textarea>
+            </div>
+            
+            <!-- REQUIRED FILE ATTACHMENTS -->
+            <div class="form-group file-upload-box">
+              <label for="t-cv">CV Upload *</label>
+              <input type="file" id="t-cv" name="cv_file" accept=".pdf,.doc,.docx" required>
+            </div>
+            <div class="form-group file-upload-box">
+              <label for="t-qual-file">Qualification / Academic Record Upload *</label>
+              <input type="file" id="t-qual-file" name="qualification_file" accept=".pdf,.jpg,.png" required>
+            </div>
+            <div class="form-group file-upload-box full">
+              <label for="t-id-file">ID Document Upload *</label>
+              <input type="file" id="t-id-file" name="id_file" accept=".pdf,.jpg,.png" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:25px; width: 100%;">Submit Tutor Application</button>
+        </form>
+      </div>
+
+      <!-- FORM 3: TUTOR CENTRES - REGISTER YOUR CENTRE -->
+      <div id="centre-form" class="form-container hidden-form">
+        <div class="form-section-title">
+          <h3>Register Your Tutor Centre</h3>
+          <p>Register your existing facility to join our accredited learning centre network[cite: 1].</p>
+        </div>
+        <form action="#" method="POST" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="c-name">Business Name *</label>
+              <input type="text" id="c-name" name="centre_name" required placeholder="e.g. Horizon Learning Centre">
+            </div>
+            <div class="form-group">
+              <label for="c-owner">Management Contacts *</label>
+              <input type="text" id="c-owner" name="owner_name" required placeholder="Contact Person & Role">
+            </div>
+            <div class="form-group">
+              <label for="c-location">Physical Address *</label>
+              <input type="text" id="c-location" name="physical_location" required placeholder="Street address of facility">
+            </div>
+            <div class="form-group">
+              <label for="c-province">Province *</label>
+              <input type="text" id="c-province" name="province" required placeholder="e.g. KwaZulu-Natal">
+            </div>
+            <div class="form-group">
+              <label for="c-tutor-count">Tutor Capacity Count *</label>
+              <input type="number" id="c-tutor-count" name="tutor_count" required placeholder="e.g. 8">
+            </div>
+            <div class="form-group">
+              <label for="c-hours">Operational Hours *</label>
+              <input type="text" id="c-hours" name="operating_hours" required placeholder="e.g. Mon-Fri 08:00 - 16:30">
+            </div>
+            <div class="form-group">
+              <label for="c-grades">Supported Grades *</label>
+              <input type="text" id="c-grades" name="grades_supported" required placeholder="e.g. Grade R - 12">
+            </div>
+            <div class="form-group">
+              <label for="c-reg-details">Registration / CIPC Details *</label>
+              <input type="text" id="c-reg-details" name="registration_details" required placeholder="e.g. CIPC Reg Number, PBO Number">
+            </div>
+            <div class="form-group full">
+              <label for="c-fee">Fee Structures *</label>
+              <textarea id="c-fee" name="fee_structure" required placeholder="Detail your monthly, termly, or hourly fee structures for attending your centre..."></textarea>
+            </div>
+            <div class="form-group full file-upload-box">
+              <label for="c-docs">Supporting Document Uploads *</label>
+              <input type="file" id="c-docs" name="centre_documents" accept=".pdf,.zip,.rar" multiple required>
+              <small style="color: var(--text-muted); margin-top: 5px; display: block;">Upload CIPC registration documents, facility profile, or accreditation certificates (PDF/ZIP).</small>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:25px; width: 100%;">Register Your Centre</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">
+      <span class="brand-name">HomeEd<span>SUPPORT · STRUCTURE · SUCCESS</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function switchForm(formId, btnElement) {
+    document.querySelectorAll('.form-container').forEach(form => {
+      form.classList.add('hidden-form');
+    });
+    document.querySelectorAll('.role-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    document.getElementById(formId).classList.remove('hidden-form');
+    btnElement.classList.add('active');
+  }
+</script>
+</body>
+</html>
